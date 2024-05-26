@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpaceData : MonoBehaviour
 {
     public GameObject nextSpace;
-    SpaceTraversal spaceTraversal;
+    
+    
     void Start()
     {
         
     }
 
-    // i have to put this here to push origin screw you github
     void Update()
     {
         
@@ -22,6 +23,7 @@ public class SpaceData : MonoBehaviour
         if (other.gameObject.tag == "Character")
         {
             other.GetComponent<SpaceTraversal>().targetSpace = nextSpace;
+            other.GetComponent<SpaceTraversal>().spacesLeft--;
             other.GetComponent<SpaceTraversal>().MoveToNextSpace();
         }
     }

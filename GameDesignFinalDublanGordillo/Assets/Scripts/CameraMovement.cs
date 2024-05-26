@@ -12,6 +12,9 @@ public class CameraMovement : MonoBehaviour
 
     void Update()
     {
-        transform.position = characterFocus.transform.position + new Vector3(0, 4, -7);
+        if (characterFocus != null)
+        {
+            transform.position = characterFocus.transform.position + new Vector3(0, 4, -7);
+        }
     }
 }

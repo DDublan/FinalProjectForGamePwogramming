@@ -5,9 +5,10 @@ using UnityEngine;
 public class Dice : MonoBehaviour
 {
     public GameObject character;
-    bool rolling = true;
-    int roll = 1;
     public List<Vector3> rollValues = new List<Vector3>();
+    public bool rolling = true;
+    int roll = 1;
+    public bool botRoll = false;
     
     void Start()
     {
@@ -23,19 +24,22 @@ public class Dice : MonoBehaviour
         }
         transform.position = character.transform.position+new Vector3(0, 2, 0);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !botRoll)
         {
             if (rolling)
             {
                 rolling = false;
-                roll = Random.Range(1, 6);
-                transform.eulerAngles = rollValues[roll-1];
-                character.GetComponent<SpaceTraversal>().spacesLeft = roll-1;
-            }
-            else
-            {
-                rolling = true;
+                roll = Random.Range(1, 7);
+                transform.eulerAngles = rollValues[roll - 1];
+                Invoke("RollDice", 1f);
             }
         }
+    }
+
+    public void RollDice()
+    {
+        character.GetComponent<SpaceTraversal>().spacesLeft = roll - 1;
+        character.GetComponent<SpaceTraversal>().MoveToNextSpace();
+        gameObject.SetActive(false);
     }
 }

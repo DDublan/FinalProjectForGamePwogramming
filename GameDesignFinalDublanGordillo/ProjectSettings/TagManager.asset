@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Space
   - Character
+  - SplitPath
   layers:
   - Default
   - TransparentFX
