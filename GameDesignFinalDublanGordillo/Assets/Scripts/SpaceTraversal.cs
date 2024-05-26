@@ -7,7 +7,7 @@ public class SpaceTraversal : MonoBehaviour
     public GameObject gameManager;
     public GameObject dice;
     public GameObject targetSpace;
-    public int spacesLeft = 0;
+    public int spacesLeft = 0; // probably will help with task one, when the value gets to -1 make sure to hide the ui text
     public bool choosePath = false;
     public bool myTurn = false;
     
