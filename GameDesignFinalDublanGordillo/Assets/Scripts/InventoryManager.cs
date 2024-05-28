@@ -28,5 +28,17 @@ public class InventoryManager : MonoBehaviour
                 stars++;
             }
         }
+        else if (other.gameObject.tag == "Space")
+        {
+            int tax = other.gameObject.GetComponent<SpaceData>().amount;
+            if (other.gameObject.GetComponent<SpaceData>().tax)
+            {
+                money -= tax;
+            }
+            else
+            {
+                money += tax;
+            }
+        }
     }
 }
