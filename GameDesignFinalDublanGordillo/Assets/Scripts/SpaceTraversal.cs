@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpaceTraversal : MonoBehaviour
 {
     public GameObject gameManager;
     public GameObject dice;
     public GameObject targetSpace;
+    public GameObject spaceCountdown;
     public int spacesLeft = 0; // probably will help with task one, when the value gets to -1 make sure to hide the ui text
     public bool choosePath = false;
     public bool myTurn = false;
@@ -22,11 +24,14 @@ public class SpaceTraversal : MonoBehaviour
         if (spacesLeft > -1 && !choosePath && !dice.gameObject.activeSelf)
         {
             transform.Translate(Vector3.forward * 5 * Time.deltaTime);
+            spaceCountdown.gameObject.SetActive(true);
+            spaceCountdown.gameObject.GetComponent<TextEditor>().text = "YO";
         }
         if (spacesLeft < 0 && !dice.gameObject.activeSelf && myTurn)
         {
             gameManager.GetComponent<GameManager>().Invoke("NextTurn", 1f);
             myTurn = false;
+            spaceCountdown.gameObject.SetActive(false);
         }
     }
 
