@@ -10,13 +10,18 @@ public class GameManager : MonoBehaviour
     int currentTurn = 0;
     void Start()
     {
-        players[currentTurn].gameObject.GetComponent<SpaceTraversal>().StartTurn();
-        cameraFocus.GetComponent<CameraMovement>().characterFocus = players[currentTurn].gameObject;
+       
     }
 
     void Update()
     {
         
+    }
+
+    public void StartGame()
+    {
+        players[currentTurn].gameObject.GetComponent<SpaceTraversal>().StartTurn();
+        cameraFocus.GetComponent<CameraMovement>().characterFocus = players[currentTurn].gameObject;
     }
 
     public void NextTurn()

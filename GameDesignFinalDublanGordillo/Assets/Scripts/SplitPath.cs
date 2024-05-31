@@ -7,6 +7,7 @@ public class SplitPath : MonoBehaviour
 {
     public GameObject firstPath;
     public GameObject secondPath;
+    public GameObject inputText;
     GameObject gameManager;
     bool choose = true;
 
@@ -54,6 +55,7 @@ public class SplitPath : MonoBehaviour
         player.GetComponent<SpaceTraversal>().targetSpace = path;
         player.GetComponent<SpaceTraversal>().MoveToNextSpace();
         choose = false;
+        inputText.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -61,6 +63,7 @@ public class SplitPath : MonoBehaviour
         if (other.gameObject.tag == "Character")
         {
             choose = true;
+            inputText.gameObject.SetActive(true);
         }
     }
 }
