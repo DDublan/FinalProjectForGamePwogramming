@@ -5,18 +5,16 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public GameObject characterFocus = null;
+    public GameObject title;
     public bool gameReady = false;
     GameObject gameManager;
     public bool moveDown = false;
+    public int moveDownSpeed = 10;
     public bool spin = false;
     void Start()
     {
         moveDown = true;
         gameManager = GameObject.Find("GameManager");
-        while(moveDown)
-        {
-            transform.Translate(Vector3.left * 10 * Time.deltaTime);
-        }
         Invoke("Spin", 4f);
     }
 
@@ -26,15 +24,29 @@ public class CameraMovement : MonoBehaviour
         {
             transform.position = characterFocus.transform.position + new Vector3(0, 4, -7);
         }
+        if (moveDown)
+        {
+            transform.Translate(Vector3.forward * moveDownSpeed * Time.deltaTime);
+        }
+        if (spin)
+        {
+            transform.Rotate(new Vector3(0, 0, 3600) * Time.deltaTime);
+        }
     }
 
     void Spin()
     {
+        title.SetActive(false);
         spin = true;
-        gameManager.GetComponent<GameManager>().Invoke("StartGame", 1f);
-        while (spin)
-        {
-            transform.Rotate(new Vector3(100, 0, 0));
-        }
+        moveDownSpeed *= 3;
+        Invoke("GetSerious", 2f);
+    }
+
+    void GetSerious()
+    {
+        spin = false;
+        moveDown = false;
+        transform.eulerAngles = new Vector3 (10, 0, 0);
+        gameManager.GetComponent<GameManager>().StartGame();
     }
 }
