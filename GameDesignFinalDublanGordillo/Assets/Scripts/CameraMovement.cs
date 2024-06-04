@@ -11,11 +11,10 @@ public class CameraMovement : MonoBehaviour
     public bool moveDown = false;
     public int moveDownSpeed = 10;
     public bool spin = false;
+    int slidesLeft = 9;
     void Start()
     {
-        moveDown = true;
-        gameManager = GameObject.Find("GameManager");
-        Invoke("Spin", 4f);
+        LetsAGo();
     }
 
     void Update()
@@ -34,6 +33,16 @@ public class CameraMovement : MonoBehaviour
         }
     }
 
+    void LetsAGo()
+    {
+        title.SetActive(true);
+        transform.position = new Vector3(-6, 100, 5);
+        transform.eulerAngles = new Vector3(90, 0, 0);
+        moveDown = true;
+        gameManager = GameObject.Find("GameManager");
+        Invoke("Spin", 4f);
+    }
+
     void Spin()
     {
         title.SetActive(false);
@@ -48,5 +57,27 @@ public class CameraMovement : MonoBehaviour
         moveDown = false;
         transform.eulerAngles = new Vector3 (10, 0, 0);
         gameManager.GetComponent<GameManager>().StartGame();
+    }
+
+    public void NewsReport()
+    {
+        characterFocus = null;
+        transform.position = new Vector3(0f, -10f, 85.2f);
+        transform.eulerAngles = Vector3.zero;
+        Invoke("NextSlide", 3f);
+    }
+
+    public void NextSlide()
+    {
+        if (slidesLeft > 0)
+        {
+            slidesLeft--;
+            transform.Translate(0, 0, 10);
+            Invoke("NextSlide", 3f);
+        }
+        else
+        {
+            Invoke("LetsAGo", 5f);
+        }
     }
 }

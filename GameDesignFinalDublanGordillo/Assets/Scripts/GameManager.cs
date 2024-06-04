@@ -26,9 +26,16 @@ public class GameManager : MonoBehaviour
 
     public void NextTurn()
     {
-        currentTurn++;
-        if (currentTurn > 3) { currentTurn = 0; }
-        players[currentTurn].gameObject.GetComponent<SpaceTraversal>().StartTurn();
-        cameraFocus.GetComponent<CameraMovement>().characterFocus = players[currentTurn].gameObject;
+        if (currentTurn < 3)
+        {
+            currentTurn++;
+            players[currentTurn].gameObject.GetComponent<SpaceTraversal>().StartTurn();
+            cameraFocus.GetComponent<CameraMovement>().characterFocus = players[currentTurn].gameObject;
+        }
+        else
+        {
+            currentTurn = 0;
+            cameraFocus.GetComponent<CameraMovement>().NewsReport();
+        }
     }
 }

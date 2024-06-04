@@ -16,7 +16,7 @@ public class SpaceTraversal : MonoBehaviour
     
     void Start()
     {
-        
+        spaceCountdown.gameObject.SetActive(false);
     }
 
     
