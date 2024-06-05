@@ -6,7 +6,7 @@ public class InventoryManager : MonoBehaviour
 {
     public GameObject character;
     public int money;
-    int stars;
+    public int stars;
     void Start()
     {
         
@@ -30,14 +30,17 @@ public class InventoryManager : MonoBehaviour
         }
         else if (other.gameObject.tag == "Space")
         {
-            int tax = other.gameObject.GetComponent<SpaceData>().amount;
-            if (other.gameObject.GetComponent<SpaceData>().tax)
+            if (character.GetComponent<SpaceTraversal>().spacesLeft < 0)
             {
-                money -= tax;
-            }
-            else
-            {
-                money += tax;
+                int tax = other.gameObject.GetComponent<SpaceData>().amount;
+                if (other.gameObject.GetComponent<SpaceData>().tax)
+                {
+                    money += tax;
+                }
+                else
+                {
+                    money -= tax;
+                }
             }
         }
     }

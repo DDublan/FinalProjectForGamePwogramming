@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class CameraMovement : MonoBehaviour
     public int moveDownSpeed = 10;
     public bool spin = false;
     int slidesLeft = 9;
+    int currentNewsReport = 0;
+    public List<int> slidesNumber = new List<int>();
+    public List<GameObject> newsReports = new List<GameObject>();
+    public string results;
     void Start()
     {
         LetsAGo();
@@ -30,6 +35,16 @@ public class CameraMovement : MonoBehaviour
         if (spin)
         {
             transform.Rotate(new Vector3(0, 0, 3600) * Time.deltaTime);
+        }
+
+        if (currentNewsReport > 2)
+        {
+            SceneManager.LoadScene(results);
+        }
+
+        if (Input.GetKey(KeyCode.G) && Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.Y))
+        {
+            Time.timeScale = 2;
         }
     }
 
@@ -61,6 +76,25 @@ public class CameraMovement : MonoBehaviour
 
     public void NewsReport()
     {
+        slidesLeft = slidesNumber[currentNewsReport];
+        if (currentNewsReport == 0)
+        {
+            newsReports[0].gameObject.SetActive(true);
+            newsReports[1].gameObject.SetActive(false);
+            newsReports[2].gameObject.SetActive(false);
+        }
+        else if (currentNewsReport == 1)
+        {
+            newsReports[0].gameObject.SetActive(false);
+            newsReports[1].gameObject.SetActive(true);
+            newsReports[2].gameObject.SetActive(false);
+        }
+        else if (currentNewsReport == 2)
+        {
+            newsReports[0].gameObject.SetActive(false);
+            newsReports[1].gameObject.SetActive(false);
+            newsReports[2].gameObject.SetActive(true);
+        }
         characterFocus = null;
         transform.position = new Vector3(0f, -10f, 85.2f);
         transform.eulerAngles = Vector3.zero;
@@ -77,6 +111,7 @@ public class CameraMovement : MonoBehaviour
         }
         else
         {
+            currentNewsReport++;
             Invoke("LetsAGo", 5f);
         }
     }

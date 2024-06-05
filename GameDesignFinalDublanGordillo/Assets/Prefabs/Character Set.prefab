@@ -50,6 +50,10 @@ PrefabInstance:
       propertyPath: dice
       value: 
       objectReference: {fileID: 3527647847821763442}
+    - target: {fileID: 5638306675496534824, guid: ae6eafefaad4b97428192740b137484e, type: 3}
+      propertyPath: inventoryManager
+      value: 
+      objectReference: {fileID: 5790965115370400763}
     - target: {fileID: 6481562997989291418, guid: ae6eafefaad4b97428192740b137484e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -248,5 +252,10 @@ PrefabInstance:
 --- !u!4 &521840588443769669 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8511440295373332372, guid: 3dd81510ae60b4c49ade1b55d3fbfe38, type: 3}
+  m_PrefabInstance: {fileID: 8152437379643081937}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5790965115370400763 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2413615546666512170, guid: 3dd81510ae60b4c49ade1b55d3fbfe38, type: 3}
   m_PrefabInstance: {fileID: 8152437379643081937}
   m_PrefabAsset: {fileID: 0}

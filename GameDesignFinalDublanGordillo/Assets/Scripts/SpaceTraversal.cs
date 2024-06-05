@@ -8,11 +8,14 @@ public class SpaceTraversal : MonoBehaviour
 {
     public GameObject gameManager;
     public GameObject dice;
+    public GameObject inventoryManager;
     public GameObject targetSpace;
     public TextMeshProUGUI spaceCountdown;
     public int spacesLeft = 0; // probably will help with task one, when the value gets to -1 make sure to hide the ui text
     public bool choosePath = false;
     public bool myTurn = false;
+    public TextMeshProUGUI moneyText;
+    public TextMeshProUGUI starText;
     
     void Start()
     {
@@ -27,9 +30,13 @@ public class SpaceTraversal : MonoBehaviour
             transform.Translate(Vector3.forward * 5 * Time.deltaTime);
             spaceCountdown.gameObject.SetActive(true);
             spaceCountdown.text = (spacesLeft + 1).ToString();
+            moneyText.text = ("Money: " + inventoryManager.GetComponent<InventoryManager>().money);
+            starText.text = ("Stars: " + inventoryManager.GetComponent<InventoryManager>().stars);
         }
         if (spacesLeft < 0 && !dice.gameObject.activeSelf && myTurn)
         {
+            moneyText.text = ("Money: " + inventoryManager.GetComponent<InventoryManager>().money);
+            starText.text = ("Stars: " + inventoryManager.GetComponent<InventoryManager>().stars);
             gameManager.GetComponent<GameManager>().Invoke("NextTurn", 1f);
             myTurn = false;
             spaceCountdown.gameObject.SetActive(false);
